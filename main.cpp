@@ -27,8 +27,6 @@ brain Brain;
 
 
 // Robot configuration code.
-
-//configure motors
 motor armMotor = motor(PORT10, ratio18_1, false);
 motor armMotor2 = motor (PORT9, ratio18_1, false);
 motor LeftDriveSmart = motor(PORT7, ratio6_1, false);
@@ -40,17 +38,13 @@ controller Controller1 = controller(primary);
 
 
 
+
 // Helper to make playing sounds from the V5 in VEXcode easier and
 // keeps the code cleaner by making it clear what is happening.
 void playVexcodeSound(const char *soundName) {
   printf("VEXPlaySound:%s\n", soundName);
   wait(5, msec);
 }
-
-
-
-// define variable for remote controller enable/disable
-bool RemoteControlCodeEnabled = true;
 
 #pragma endregion VEXcode Generated Robot Configuration
 
@@ -71,7 +65,14 @@ using namespace vex;
 competition Competition;
 
 void runOnAutonomous(void) {
-  
+  Brain.Screen.print("Running auto");
+  LeftDriveSmart.setVelocity(100, percent);
+  RightDriveSmart.setVelocity(100, percent);
+  // score first ball
+  Drivetrain.driveFor(forward, 120, inches);
+  Drivetrain.turnFor(right, 220, degrees);
+  Drivetrain.driveFor(forward, 40, inches);
+  // 
 }
 
 //spin function
@@ -96,8 +97,8 @@ void runOnDriverControl(void) {
   Brain.Screen.setFont(mono20);
   Brain.Screen.print("Running teleop");
 
-  armMotor.setVelocity(50, percent);
-
+  armMotor.setVelocity(25, percent);
+  armMotor2.setVelocity(25, percent);
 
   while (true) {
     
@@ -131,8 +132,8 @@ void runOnDriverControl(void) {
 }
 
 int main() {
-  
-  runOnDriverControl();
+  runOnAutonomous();
+//   // runOnDriverControl();
   // Competition.autonomous(runOnAutonomous);
   Competition.drivercontrol(runOnDriverControl);
 
