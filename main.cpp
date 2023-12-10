@@ -64,17 +64,6 @@ void playVexcodeSound(const char *soundName) {
 using namespace vex;
 competition Competition;
 
-void runOnAutonomous(void) {
-  Brain.Screen.print("Running auto");
-  LeftDriveSmart.setVelocity(100, percent);
-  RightDriveSmart.setVelocity(100, percent);
-  // score first ball
-  Drivetrain.driveFor(forward, 120, inches);
-  Drivetrain.turnFor(right, 220, degrees);
-  Drivetrain.driveFor(forward, 40, inches);
-  // 
-}
-
 //spin function
 void spin(void) {
     //motor on port 10 is forward and motor in port 9 is in reverse on nov 17
@@ -91,6 +80,39 @@ void spinrev(void) {
 void stop_motor(void) {
   armMotor.stop();
   armMotor2.stop();
+}
+
+void start(void) {
+  LeftDriveSmart.spin(forward);
+  RightDriveSmart.spin(forward);
+}
+
+void end(void) {
+  LeftDriveSmart.stop();
+  RightDriveSmart.stop();
+}
+
+// coefficient for autonomous code
+int autoco = 1;
+void runOnAutonomous(void) {
+  Brain.Screen.print("Hello I am ethan dog");
+
+  LeftDriveSmart.setVelocity(100*autoco, percent);
+  RightDriveSmart.setVelocity(100*autoco, percent);
+
+  //score first ball
+  Drivetrain.driveFor(forward, 120*autoco, inches);
+
+  //turn
+  RightDriveSmart.setVelocity(50*autoco, percent);
+  start();
+  wait(800, msec);
+  end();
+  wait(300, msec);
+
+  // move back straight
+  RightDriveSmart.setVelocity((100*autoco, percent);
+  Drivetrain.driveFor(reverse, 80*autoco, inches);
 }
 
 void runOnDriverControl(void) {
