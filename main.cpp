@@ -106,13 +106,23 @@ void runOnAutonomous(void) {
   //turn
   RightDriveSmart.setVelocity(50*autoco, percent);
   start();
-  wait(800, msec);
+  wait(800*autoco, msec);
   end();
   wait(300, msec);
 
   // move back straight
-  RightDriveSmart.setVelocity((100*autoco, percent);
-  Drivetrain.driveFor(reverse, 80*autoco, inches);
+  RightDriveSmart.setVelocity(100*autoco, percent);
+  Drivetrain.driveFor(reverse, 160*autoco, inches);
+
+  // turn a bit to the left
+  Drivetrain.turnFor(left, 90*autoco, degrees);
+  // drive forward/right to score the ball
+  RightDriveSmart.setVelocity(60*autoco, percent);
+  start();
+  wait(800*autoco, msec);
+  end();
+  wait(300, msec);
+
 }
 
 void runOnDriverControl(void) {
