@@ -103,9 +103,9 @@ void runOnAutonomous(void) {
   //score first ball
   Drivetrain.driveFor(forward, 120*autoco, inches);
 
+  //open arms
   spin();
-  wait(800, msec);
-  stop_motor();
+  wait(1000, msec);
 
   //turn
   RightDriveSmart.setVelocity(50*autoco, percent);
@@ -113,6 +113,8 @@ void runOnAutonomous(void) {
   wait(800*autoco, msec);
   end();
   wait(300, msec);
+  stop_motor();
+  wait(500, msec);
 
   // move back straight
   RightDriveSmart.setVelocity(100*autoco, percent);
@@ -150,8 +152,8 @@ void runOnDriverControl(void) {
 
     
     // drivetrain
-    LeftDriveSmart.setVelocity(Controller1.Axis3.position()+Controller1.Axis1.position(), percent);
-    RightDriveSmart.setVelocity(Controller1.Axis3.position()-Controller1.Axis1.position(), percent);
+    LeftDriveSmart.setVelocity(Controller1.Axis3.position()+Controller1.Axis4.position(), percent);
+    RightDriveSmart.setVelocity(Controller1.Axis3.position()-Controller1.Axis4.position(), percent);
 
     
     LeftDriveSmart.spin(forward);
