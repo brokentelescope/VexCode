@@ -101,7 +101,7 @@ void runOnAutonomous(void) {
   RightDriveSmart.setVelocity(100*autoco, percent);
 
   //score first ball
-  Drivetrain.driveFor(forward, 120*autoco, inches);
+  Drivetrain.driveFor(forward, 100*autoco, inches);
 
   //open arms
   spin();
@@ -110,7 +110,7 @@ void runOnAutonomous(void) {
   //turn
   RightDriveSmart.setVelocity(50*autoco, percent);
   start();
-  wait(800*autoco, msec);
+  wait(1000*autoco, msec);
   end();
   wait(300, msec);
   stop_motor();
@@ -165,7 +165,7 @@ void runOnDriverControl(void) {
 
 int main() {
   runOnAutonomous();
-//   // runOnDriverControl();
+  // runOnDriverControl();
   // Competition.autonomous(runOnAutonomous);
   Competition.drivercontrol(runOnDriverControl);
 
