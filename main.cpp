@@ -103,18 +103,34 @@ void runOnAutonomous(void) {
   //score first ball
   Drivetrain.driveFor(forward, 100*autoco, inches);
 
-  //open arms
-  spin();
-  wait(1000, msec);
-
   //turn
   RightDriveSmart.setVelocity(50*autoco, percent);
   start();
   wait(1000*autoco, msec);
   end();
-  wait(300, msec);
-  stop_motor();
   wait(500, msec);
+
+  //open arms
+  spin();
+  wait(1000, msec);
+  stop_motor();
+
+  wait(100, msec);
+
+  // drive back
+  Drivetrain.driveFor(reverse, 80*autoco, inches);
+
+  // close arms
+  spinrev();
+  wait(1000, msec);
+  stop_motor();
+
+  wait(100, msec);
+
+  // drive straight 
+
+  Drivetrain.driveFor(forward, 80*autoco, inches);
+  // SECOND BALL SECOND BALL  SECOND BALL  SECOND BALL  SECOND BALL 
 
   // move back straight
   RightDriveSmart.setVelocity(100*autoco, percent);
@@ -127,7 +143,7 @@ void runOnAutonomous(void) {
   start();
   wait(800*autoco, msec);
   end();
-  wait(300, msec);
+  wait(300*autoco, msec);
 
 }
 
@@ -170,7 +186,7 @@ int main() {
   Competition.drivercontrol(runOnDriverControl);
 
   while (true) {
-    wait(0.05, seconds);
+    wait(0.05*autoco, seconds);
   }
 
 }
