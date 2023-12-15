@@ -93,22 +93,35 @@ void end(void) {
 }
 
 // coefficient for autonomous code
-int autoco = 1;
+double autoco = 1;
+//multiply real inches by con for code
+double con = 3.2;
+
+void test(void) {
+  LeftDriveSmart.setVelocity(100, percent);
+  RightDriveSmart.setVelocity(100, percent);
+
+  Drivetrain.driveFor(forward, 36*con*autoco, inches);
+
+  wait(2000, msec);
+
+  Drivetrain.turnFor(right, 300, degrees);
+}
+
+// 100 CODE INCHES --> 36 REAL INCHES 
+
 void runOnAutonomous(void) {
   Brain.Screen.print("Hello I am ethan dog");
 
+//setting velocity
   LeftDriveSmart.setVelocity(100*autoco, percent);
   RightDriveSmart.setVelocity(100*autoco, percent);
 
   //score first ball
-  Drivetrain.driveFor(forward, 100*autoco, inches);
+  Drivetrain.driveFor(forward, 36*con*autoco, inches);
 
-  //turn
-  RightDriveSmart.setVelocity(50*autoco, percent);
-  start();
-  wait(1000*autoco, msec);
-  end();
-  wait(500, msec);
+  //turn (testing in progress)
+  Drivetrain.turnFor(right, 300, degrees);
 
   //open arms
   spin();
@@ -118,7 +131,7 @@ void runOnAutonomous(void) {
   wait(100, msec);
 
   // drive back
-  Drivetrain.driveFor(reverse, 80*autoco, inches);
+  Drivetrain.driveFor(reverse, 35*con*autoco, inches);
 
   // close arms
   spinrev();
@@ -129,11 +142,11 @@ void runOnAutonomous(void) {
 
   // drive straight 
 
-  Drivetrain.driveFor(forward, 80*autoco, inches);
+  Drivetrain.driveFor(forward, 55*con*autoco, inches);
   // SECOND BALL SECOND BALL  SECOND BALL  SECOND BALL  SECOND BALL 
 
+
   // move back straight
-  RightDriveSmart.setVelocity(100*autoco, percent);
   Drivetrain.driveFor(reverse, 160*autoco, inches);
 
   // turn a bit to the left
@@ -146,6 +159,19 @@ void runOnAutonomous(void) {
   wait(300*autoco, msec);
 
 }
+  // // move back straight
+  // Drivetrain.driveFor(reverse, 160*autoco, inches);
+
+  // // turn a bit to the left
+  // Drivetrain.turnFor(left, 90*autoco, degrees);
+  // // drive forward/right to score the ball
+  // RightDriveSmart.setVelocity(60*autoco, percent);
+  // start();
+  // wait(800*autoco, msec);
+  // end();
+  // wait(300*autoco, msec);
+
+
 
 void runOnDriverControl(void) {
   Brain.Screen.setFont(mono20);
@@ -180,9 +206,7 @@ void runOnDriverControl(void) {
 }
 
 int main() {
-  runOnAutonomous();
-  // runOnDriverControl();
-  // Competition.autonomous(runOnAutonomous);
+  Competition.autonomous(runOnAutonomous);
   Competition.drivercontrol(runOnDriverControl);
 
   while (true) {
